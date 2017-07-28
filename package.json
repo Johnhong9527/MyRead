@@ -12,6 +12,7 @@
 		"global": "^4.3.2",
 		"react": "16.0.0-alpha.12",
 		"react-native": "^0.46.4",
+		"react-native-navigation": "^1.1.162",
 		"rn-splash-screen": "^4.0.1"
 	},
 	"devDependencies": {
