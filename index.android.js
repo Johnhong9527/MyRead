@@ -11,8 +11,20 @@ import {
   Text,
   View
 } from 'react-native';
+// 引入引导页组件
+import SplashScreen from 'rn-splash-screen';
 
 export default class myApp extends Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000);
+  }
   render() {
     return (
       <View style={styles.container}>

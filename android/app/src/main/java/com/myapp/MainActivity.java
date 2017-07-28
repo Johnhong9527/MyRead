@@ -1,6 +1,10 @@
 package com.myapp;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactInstanceManager;
+import com.mehcode.reactnative.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +15,11 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "myApp";
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      // Show the js-controlled splash screen
+      SplashScreen.show(this, getReactInstanceManager());
+      super.onCreate(savedInstanceState);
     }
 }

@@ -1636,7 +1636,7 @@ glob@^7.0.3, glob@^7.0.5, glob@^7.1.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-global@^4.3.0:
+global@^4.3.0, global@^4.3.2:
   version "4.3.2"
   resolved "http://registry.npm.taobao.org/global/download/global-4.3.2.tgz#e76989268a6c74c38908b1305b10fc0e394e9d0f"
   dependencies:
@@ -3060,7 +3060,7 @@ react-devtools-core@2.3.1:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-native@0.46.4:
+react-native@^0.46.4:
   version "0.46.4"
   resolved "http://registry.npm.taobao.org/react-native/download/react-native-0.46.4.tgz#281bbcc165e5c36b4c8eaa868e6768543e811bcb"
   dependencies:
@@ -3365,6 +3365,10 @@ rimraf@^2.5.4, rimraf@^2.6.1:
 rimraf@~2.2.6:
   version "2.2.8"
   resolved "http://registry.npm.taobao.org/rimraf/download/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
+
+rn-splash-screen@^4.0.1:
+  version "4.0.1"
+  resolved "http://registry.npm.taobao.org/rn-splash-screen/download/rn-splash-screen-4.0.1.tgz#fc46a1574c6f44ba815c20e43b353e79929eaa70"
 
 rndm@1.2.0:
   version "1.2.0"
