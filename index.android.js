@@ -9,35 +9,37 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  FlatList
 } from 'react-native';
+import axios from 'axios'
+import qs from 'qs'
 // 引入引导页组件
 import SplashScreen from 'rn-splash-screen';
 
 export default class myApp extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      title: ''
+    };
   }
-
-  componentDidMount() {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 2000);
+  componentWillMount() {
+    axios.get('http://127.0.0.1:3000/getChapter?chapterUrl=http://www.snwx.com/book/7/7136/24849650.html').then(res => {
+      console.log(chapterUrl)
+      console.log(res.data.chapter.title)
+      let body = res.data.chapter.title
+      this.setState = ({
+        title: body
+      })
+    })
+    console.log(this.state.body)
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!,{'\n'}
-          哈哈哈哈
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
+      <View style={styles.container.body}>
+        <Text>
+          {this.state.title}
         </Text>
       </View>
     );
@@ -50,16 +52,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
