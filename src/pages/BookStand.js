@@ -4,26 +4,14 @@ import {
   View,
   StyleSheet
 } from 'react-native';
+import axios from 'axios'
 
 export default class BookStand extends React.Component {
-  // componentWillMount() {
-  //   setTimeout(() => {
-  //     SplashScreen.hide();
-  //   }, 2000);
-  // }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!,{'\n'}
           BookStand
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
         </Text>
       </View>
     );
@@ -38,13 +26,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    fontSize: 25
+  }
 });

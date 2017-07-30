@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import SplashScreen from 'rn-splash-screen';
-import axios from 'axios'
 
 import BookStand from './pages/BookStand';
 import City from './pages/City';
@@ -22,18 +21,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab:'BookStand'
+      selectedTab:'Stack'
     };
   }
   componentWillMount() {
-    axios.get('http://127.0.0.1:3000/getChapter?chapterUrl=http://www.snwx.com/book/7/7136/24849650.html').then(res => {
-      console.log(chapterUrl)
-      console.log(res.data.chapter.title)
-      let body = res.data.chapter.title
-      this.setState = ({
-        title: body
-      })
-    })
     console.log(this.state.body)
     setTimeout(() => {
       SplashScreen.hide();
