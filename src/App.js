@@ -1,50 +1,97 @@
-import { Navigation } from 'react-native-navigation';
-import { NativeModules } from 'react-native';
+/**
+ * 商城主框架界面
+ */
+'use strict';
+import React, {Component} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+} from 'react-native';
+import TabNavigator from 'react-native-tab-navigator';
+import SplashScreen from 'rn-splash-screen';
+import axios from 'axios'
 
-import { registerScreens } from './screens';
+import BookStand from './pages/BookStand';
+import City from './pages/City';
+import Stack from './pages/Stack';
+import Category from './pages/Category';
 
-registerScreens(); // this is where you register all of your app's screens
-
-// 内置对象扩展
-String.prototype.replaceAll = function(search, replacement) {
-  var target = this;
-  return target.replace(new RegExp(search, 'g'), replacement);
-};
-
-// start the app
-Navigation.startTabBasedApp({
-  tabs: [
-    {
-      label: 'Explore',
-      screen: 'app.Home', // this is a registered name for a screen
-      icon: require('./img/maintab_bookstand_icon.png'),
-      selectedIcon: require('./img/maintab_bookstand_icon.png'), // iOS only
-      title: 'Explore',
-    },
-    {
-      label: 'Search',
-      screen: 'app.Search', // this is a registered name for a screen
-      icon: require('./img/maintab_city_icon.png'),
-      selectedIcon: require('./img/maintab_city_icon.png'), // iOS only
-      title: 'Search',
-    },
-    {
-      label: 'Download',
-      screen: 'app.Download',
-      icon: require('./img/maintab_stack_icon.png'),
-      selectedIcon: require('./img/maintab_stack_icon.png'), // iOS only
-      title: 'Download',
-    },
-    {
-      label: 'More',
-      screen: 'app.More',
-      icon: require('./img/maintab_category_icon.png'),
-      selectedIcon: require('./img/maintab_category_icon.png'), // iOS only
-      title: 'More',
-    },
-  ],
-  appStyle: {
-    tabBarSelectedButtonColor: '#3399FE', // change the color of the selected tab icon and text (only selected)
-    forceTitlesDisplay: true, // Android only. If true - Show all bottom tab labels. If false - only the selected tab's label is visible.
-  },
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab:'BookStand'
+    };
+  }
+  componentWillMount() {
+    axios.get('http://127.0.0.1:3000/getChapter?chapterUrl=http://www.snwx.com/book/7/7136/24849650.html').then(res => {
+      console.log(chapterUrl)
+      console.log(res.data.chapter.title)
+      let body = res.data.chapter.title
+      this.setState = ({
+        title: body
+      })
+    })
+    console.log(this.state.body)
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000);
+  }
+  render() {
+    return (
+      <TabNavigator>
+        <TabNavigator.Item
+          title="BookStand"
+          selected={this.state.selectedTab === 'BookStand'}
+          titleStyle={styles.textStyle}
+          renderIcon={() => <Image source={require('./imgs/maintab_bookstand_icon.png')} style={styles.iconStyle}/>}
+          renderSelectedIcon={() => <Image source={require('./imgs/maintab_bookstand_icon_hover.png')} style={styles.iconStyle}/>}
+          onPress={() => this.setState({ selectedTab: 'BookStand' })}>
+          <BookStand {...this.props}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          title="City"
+          selected={this.state.selectedTab === 'City'}
+          titleStyle={styles.textStyle}
+          renderIcon={() => <Image source={require("./imgs/maintab_city_icon.png")} style={styles.iconStyle}/>}
+          renderSelectedIcon={() => <Image source={require("./imgs/maintab_city_icon_hover.png")} style={styles.iconStyle}/>}
+          onPress={() => this.setState({ selectedTab: 'City' })}>
+          <City {...this.props}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          title="stack"
+          selected={this.state.selectedTab === 'Stack'}
+          titleStyle={styles.textStyle}
+          renderIcon={() => <Image source={require("./imgs/maintab_stack_icon.png")} style={styles.iconStyle}/>}
+          renderSelectedIcon={() => <Image source={require("./imgs/maintab_stack_icon_hover.png")} style={styles.iconStyle}/>}
+          onPress={() => this.setState({ selectedTab: 'Stack' })}>
+          <Stack {...this.props}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          title="Category"
+          selected={this.state.selectedTab === 'Category'}
+          titleStyle={styles.textStyle}
+          renderIcon={() => <Image source={require('./imgs/maintab_category_icon.png')} style={styles.iconStyle}/>}
+          renderSelectedIcon={() => <Image source={require('./imgs/maintab_category_icon_hover.png')} style={styles.iconStyle}/>}
+          onPress={() => this.setState({ selectedTab: 'Category' })}>
+          <Category {...this.props}/>
+        </TabNavigator.Item>
+      </TabNavigator>
+    );
+  }
+}
+const styles=StyleSheet.create({
+   iconStyle:{
+       width:26,
+       height:26,
+   },
+   textStyle:{
+       color:'#999',
+   },
+   selectedTextStyle:{
+       color:'black',
+   }
 });
+export default App;

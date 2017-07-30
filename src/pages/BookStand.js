@@ -1,30 +1,22 @@
 import React from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
   Text,
-  View
+  View,
+  StyleSheet
 } from 'react-native';
-// 引入引导页组件
-import SplashScreen from 'rn-splash-screen';
 
-export default class myApp extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 2000);
-  }
+export default class BookStand extends React.Component {
+  // componentWillMount() {
+  //   setTimeout(() => {
+  //     SplashScreen.hide();
+  //   }, 2000);
+  // }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!,{'\n'}
-          哈哈哈哈
+          BookStand
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
