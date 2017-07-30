@@ -24,6 +24,11 @@ export default class myApp extends React.Component {
       title: ''
     };
   }
+  componentDidMount() {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000);
+  }
   componentWillMount() {
     axios.get('http://127.0.0.1:3000/getChapter?chapterUrl=http://www.snwx.com/book/7/7136/24849650.html').then(res => {
       console.log(chapterUrl)
