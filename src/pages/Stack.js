@@ -7,7 +7,6 @@ import {
   SectionList
 } from 'react-native';
 import axios from 'axios'
-import redux from 'redux'
 
 
 export default class Stack extends React.Component {
