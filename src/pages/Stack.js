@@ -43,49 +43,55 @@ export default class Stack extends React.Component {
       })
     })
   }
+  _renderItem = ({ item}) => (
 
-  // _extraUniqueKey(item ,index){
-  //   return "index"+index+item;
-  // }
-  readerItem = (item) => (
     <View  style={styles.list}>
-      <TouchableOpacity onPress={() => this._pressRow(item)}>
-        <View style={styles.row}>
-          <Text>{item.item.name}</Text>
-          <Text>{item.item.bookCount}</Text>
-        </View>
-      </TouchableOpacity>
+      {
+        item.map((item, i) => this.renderExpenseItem(item, i))
+      }
+    </View>
+
+  );
+  readerItem = (item) => (
+     <View style={styles.list}>
+       {
+         item.section.data.map((i)=>{
+           this._readerList(i)
+         })
+       }
     </View>
   )
-  /*
-      <TouchableOpacity onPress={() => this._pressRow(item)}>
-        <View style={styles.row}>
-          <Text>{item.item.name}</Text>
-        </View>
-      </TouchableOpacity>
-
-  * */
-
+  // item.section.data
+  _readerList = (item) => {
+    console.log(item)
+    return <TouchableOpacity key={item.bookCount} onPress={() => this._pressRow(item)} underlayColor="transparent">
+      <View style={styles.row}>
+        <Text>{item.name}</Text>
+        <Text>{item.bookCount}</Text>
+      </View>
+    </TouchableOpacity>
+  }
   readerHeader = (headerItem) => {
-    return <View style={{ height: 25 }}>
-      <Text style={styles.sectionHeader} >{headerItem.section.key}</Text>
+    return <View style={{height: 25, borderBottomWidth: 1, borderColor: '#d3d3d3', margin: 10, paddingBottom: 5}}>
+      <Text style={styles.sectionHeader}>{headerItem.section.key}</Text>
     </View>
   }
-  _pressRow (item) {
+
+  _pressRow(item) {
     console.log(item)
   }
   render() {
+
     return (
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <Text style={styles.navigatorStyle}> 发现 </Text>
-        <View>
+        <View style={{ flex: 1, backgroundColor: '#F7F6F8' }}>
           <SectionList
+            contentInset={{top:0,left:0,bottom:49,right:0}}
             renderItem={this.readerItem}
-            // contentContainerStyle={styles.list}//设置cell的样式
             renderSectionHeader={this.readerHeader}
             showsVerticalScrollIndicator={false}
             sections={sections}
-            // pageSize={4}  // 配置pageSize确认网格数量
             keyExtractor={(item) => item.name}
           />
         </View>
@@ -121,12 +127,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   list: {
-    // justifyContent: 'space-around',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     // width: '100%',
-    alignItems: 'flex-start',
-    backgroundColor: '#FFFFFF'
+    marginBottom: 5,
+    height: 50,
+    color: 'white',
+    backgroundColor: '#ff3b0f',
+    flexDirection: 'row',//设置横向布局
+    flexWrap: 'wrap',  //设置换行显示
   },
   text: {
     width: 100,
@@ -138,16 +145,16 @@ const styles = StyleSheet.create({
   sectionHeader: {
     marginLeft: 10,
     padding: 6.5,
-    // width:'100%',
+    width:'100%',
     textAlign: 'left',
     fontSize: 12,
     color: '#787878'
   },
   row: {
-    width: 100,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    width: (ScreenWidth - 1) / 4,
+    height: (ScreenWidth - 1) / 4,
     alignItems: 'center',
-    borderWidth:1,
-    margin: 5,
-    padding:5
   }
 });
