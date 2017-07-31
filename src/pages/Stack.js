@@ -44,20 +44,16 @@ export default class Stack extends React.Component {
     })
   }
   _renderItem = ({ item}) => (
-
     <View  style={styles.list}>
       {
         item.map((item, i) => this.renderExpenseItem(item, i))
       }
     </View>
-
   );
-  readerItem = (item) => (
+  readerItem = ({item}) => (
      <View style={styles.list}>
        {
-         item.section.data.map((i)=>{
-           this._readerList(i)
-         })
+          this._readerList(item)
        }
     </View>
   )
@@ -87,7 +83,7 @@ export default class Stack extends React.Component {
         <Text style={styles.navigatorStyle}> 发现 </Text>
         <View style={{ flex: 1, backgroundColor: '#F7F6F8' }}>
           <SectionList
-            contentInset={{top:0,left:0,bottom:49,right:0}}
+            // contentInset={{top:0,left:0,bottom:49,right:0}}
             renderItem={this.readerItem}
             renderSectionHeader={this.readerHeader}
             showsVerticalScrollIndicator={false}
@@ -130,8 +126,7 @@ const styles = StyleSheet.create({
     // width: '100%',
     marginBottom: 5,
     height: 50,
-    color: 'white',
-    backgroundColor: '#ff3b0f',
+    backgroundColor: '#8bff91',
     flexDirection: 'row',//设置横向布局
     flexWrap: 'wrap',  //设置换行显示
   },
