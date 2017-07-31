@@ -25,7 +25,6 @@ class App extends Component {
     };
   }
   componentWillMount() {
-    console.log(this.state.body)
     setTimeout(() => {
       SplashScreen.hide();
     }, 2000);
