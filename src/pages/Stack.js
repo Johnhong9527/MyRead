@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import axios from 'axios'
+import Dimensions from 'Dimensions'
 
 const sections = new Array(4)
 axios.get('http://api.zhuishushenqi.com/cats/lv2/statistics').then(res => {
@@ -17,6 +18,9 @@ axios.get('http://api.zhuishushenqi.com/cats/lv2/statistics').then(res => {
   sections[3] = {key: '出版', data: res.data.press}
 })
 console.log(sections)
+
+const ScreenWidth = Dimensions.get('window').width;
+const ScreenHeight = Dimensions.get('window').height;
 
 export default class Stack extends React.Component {
   constructor(props) {
@@ -43,13 +47,33 @@ export default class Stack extends React.Component {
   // _extraUniqueKey(item ,index){
   //   return "index"+index+item;
   // }
-  readerItem = (item) => {
-    return <View style={styles.text}><Text>{item.item.name}</Text><Text>{item.item.bookCount}</Text></View>
-  }
-  readerHeader = (headerItem) => {
-    return <Text style={styles.header}>{headerItem.section.key}</Text>
-  }
+  readerItem = (item) => (
+    <View  style={styles.list}>
+      <TouchableOpacity onPress={() => this._pressRow(item)}>
+        <View style={styles.row}>
+          <Text>{item.item.name}</Text>
+          <Text>{item.item.bookCount}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
+  /*
+      <TouchableOpacity onPress={() => this._pressRow(item)}>
+        <View style={styles.row}>
+          <Text>{item.item.name}</Text>
+        </View>
+      </TouchableOpacity>
 
+  * */
+
+  readerHeader = (headerItem) => {
+    return <View style={{ height: 25 }}>
+      <Text style={styles.sectionHeader} >{headerItem.section.key}</Text>
+    </View>
+  }
+  _pressRow (item) {
+    console.log(item)
+  }
   render() {
     return (
       <View style={{flex:1}}>
@@ -57,7 +81,7 @@ export default class Stack extends React.Component {
         <View>
           <SectionList
             renderItem={this.readerItem}
-            contentContainerStyle={styles.list}//设置cell的样式
+            // contentContainerStyle={styles.list}//设置cell的样式
             renderSectionHeader={this.readerHeader}
             showsVerticalScrollIndicator={false}
             sections={sections}
@@ -100,16 +124,30 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-around',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: '100%',
+    // width: '100%',
     alignItems: 'flex-start',
     backgroundColor: '#FFFFFF'
   },
   text: {
-    width:'33.33%',
-    borderColor:'#ff8e45',
+    width: 100,
+    alignItems: 'center',
     borderWidth:1,
-    margin:5
+    margin: 5,
+    padding:5
   },
-  header: {
+  sectionHeader: {
+    marginLeft: 10,
+    padding: 6.5,
+    // width:'100%',
+    textAlign: 'left',
+    fontSize: 12,
+    color: '#787878'
+  },
+  row: {
+    width: 100,
+    alignItems: 'center',
+    borderWidth:1,
+    margin: 5,
+    padding:5
   }
 });
