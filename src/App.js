@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <TabNavigator>
         <TabNavigator.Item
-          title="BookStand"
+          title="书架"
           selected={this.state.selectedTab === 'BookStand'}
           titleStyle={styles.textStyle}
           renderIcon={() => <Image source={require('./imgs/maintab_bookstand_icon.png')} style={styles.iconStyle}/>}
@@ -42,7 +42,7 @@ class App extends Component {
           <BookStand {...this.props}/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          title="City"
+          title="排行榜"
           selected={this.state.selectedTab === 'City'}
           titleStyle={styles.textStyle}
           renderIcon={() => <Image source={require("./imgs/maintab_city_icon.png")} style={styles.iconStyle}/>}
@@ -51,7 +51,7 @@ class App extends Component {
           <City {...this.props}/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          title="stack"
+          title="书架"
           selected={this.state.selectedTab === 'Stack'}
           titleStyle={styles.textStyle}
           renderIcon={() => <Image source={require("./imgs/maintab_stack_icon.png")} style={styles.iconStyle}/>}
@@ -60,7 +60,7 @@ class App extends Component {
           <Stack {...this.props}/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          title="Category"
+          title="搜索"
           selected={this.state.selectedTab === 'Category'}
           titleStyle={styles.textStyle}
           renderIcon={() => <Image source={require('./imgs/maintab_category_icon.png')} style={styles.iconStyle}/>}

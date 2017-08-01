@@ -45,31 +45,31 @@ export default class Stack extends React.Component {
   }
   _renderItem = ({ item}) => (
     <View  style={styles.list}>
-      {
-        item.map((item, i) => this.renderExpenseItem(item, i))
-      }
+    {
+      item.map((item, i) => this.renderExpenseItem(item, i))
+    }
     </View>
   );
   readerItem = ({item}) => (
-     <View style={styles.list}>
-       {
-          this._readerList(item)
-       }
+    <View style={styles.list}>
+    {
+      this._readerList(item)
+    }
     </View>
   )
   // item.section.data
   _readerList = (item) => {
     console.log(item)
     return <TouchableOpacity key={item.bookCount} onPress={() => this._pressRow(item)} underlayColor="transparent">
-      <View style={styles.row}>
-        <Text>{item.name}</Text>
-        <Text>{item.bookCount}</Text>
-      </View>
+    <View style={styles.row}>
+    <Text>{item.name}</Text>
+    <Text>{item.bookCount}</Text>
+    </View>
     </TouchableOpacity>
   }
   readerHeader = (headerItem) => {
     return <View style={{height: 25, borderBottomWidth: 1, borderColor: '#d3d3d3', margin: 10, paddingBottom: 5}}>
-      <Text style={styles.sectionHeader}>{headerItem.section.key}</Text>
+    <Text style={styles.sectionHeader}>{headerItem.section.key}</Text>
     </View>
   }
 
@@ -80,17 +80,17 @@ export default class Stack extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <Text style={styles.navigatorStyle}> 发现 </Text>
-        <View style={{ flex: 1, backgroundColor: '#F7F6F8' }}>
-          <SectionList
-            // contentInset={{top:0,left:0,bottom:49,right:0}}
-            renderItem={this.readerItem}
-            renderSectionHeader={this.readerHeader}
-            showsVerticalScrollIndicator={false}
-            sections={sections}
-            keyExtractor={(item) => item.name}
-          />
-        </View>
+      <Text style={styles.navigatorStyle}> 发现 </Text>
+      <View style={{ flex: 1, backgroundColor: '#F7F6F8' }}>
+      <SectionList
+      // contentInset={{top:0,left:0,bottom:49,right:0}}
+      renderItem={this.readerItem}
+      renderSectionHeader={this.readerHeader}
+      showsVerticalScrollIndicator={false}
+      sections={sections}
+      keyExtractor={(item) => item.name}
+      />
+      </View>
       </View>
     );
   }
