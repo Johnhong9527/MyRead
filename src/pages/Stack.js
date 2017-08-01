@@ -18,6 +18,7 @@ axios.get('http://api.zhuishushenqi.com/cats/lv2/statistics').then(res => {
   sections[3] = {key: '出版', data: res.data.press}
 })
 console.log(sections)
+console.log(21);
 
 const ScreenWidth = Dimensions.get('window').width;
 const ScreenHeight = Dimensions.get('window').height;
@@ -43,17 +44,18 @@ export default class Stack extends React.Component {
       })
     })
   }
-  _renderItem = ({ item}) => (
+  _renderItem = ({item}) => (
     <View  style={styles.list}>
     {
       item.map((item, i) => this.renderExpenseItem(item, i))
     }
     </View>
   );
-  readerItem = ({item}) => (
+  readerItem = (item) => (
     <View style={styles.list}>
     {
-      this._readerList(item)
+      console.log(item)
+      // item.map((item, i) => this._readerList(item, i))
     }
     </View>
   )
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     // width: '100%',
     marginBottom: 5,
     height: 50,
-    backgroundColor: '#8bff91',
+    backgroundColor: '#d3d3d3',
     flexDirection: 'row',//设置横向布局
     flexWrap: 'wrap',  //设置换行显示
   },
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     marginLeft: 10,
-    padding: 6.5,
+    // padding: 6.5,
     width:'100%',
     textAlign: 'left',
     fontSize: 12,
