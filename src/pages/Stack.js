@@ -51,12 +51,14 @@ export default class Stack extends React.Component {
     }
     </View>
   );
-  readerItem = (item) => (
+  // item.item
+  readerItem = ({section}) => (
     <View style={styles.list}>
-    {
-      console.log(item)
-      // item.map((item, i) => this._readerList(item, i))
-    }
+      {
+        // console.log(item.item)
+        section.data.map((item, i) => this._readerList(item, i))
+        // this._readerList(item.item)
+      }
     </View>
   )
   // item.section.data
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   list: {
-    // width: '100%',
+    width: '100%',
     marginBottom: 5,
     height: 50,
     backgroundColor: '#d3d3d3',
@@ -149,7 +151,8 @@ const styles = StyleSheet.create({
   },
   row: {
     backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
+    paddingTop: (ScreenWidth - 1) / 4 /12,
+    // justifyContent: 'center',
     width: (ScreenWidth - 1) / 4,
     height: (ScreenWidth - 1) / 4,
     alignItems: 'center',
