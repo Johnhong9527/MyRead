@@ -51,7 +51,7 @@ class App extends Component {
           <City {...this.props}/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          title="书架"
+          title="分类"
           selected={this.state.selectedTab === 'Stack'}
           titleStyle={styles.textStyle}
           renderIcon={() => <Image source={require("./imgs/maintab_stack_icon.png")} style={styles.iconStyle}/>}
