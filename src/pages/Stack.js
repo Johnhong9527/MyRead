@@ -14,11 +14,9 @@ const sections = new Array(4)
 axios.get('http://api.zhuishushenqi.com/cats/lv2/statistics').then(res => {
   sections[0] = {key: '男生', data: res.data.male};
   sections[1] = {key: '女生', data: res.data.female};
-  sections[2] = {key: '其他', data: res.data.picture}
-  sections[3] = {key: '出版', data: res.data.press}
+  sections[2] = {key: '出版', data: res.data.press}
+  sections[3] = {key: '其他', data: res.data.picture}
 })
-console.log(sections)
-console.log(21);
 
 const ScreenWidth = Dimensions.get('window').width;
 const ScreenHeight = Dimensions.get('window').height;
@@ -52,27 +50,16 @@ export default class Stack extends React.Component {
     </View>
   );
   // item.item
-  readerItem = ({section}) => (
-    <View style={styles.list}>
-      {
-        // console.log(item.item)
-        section.data.map((item, i) => this._readerList(item, i))
-        // this._readerList(item.item)
-      }
+  readerItem = ({item}) => {
+    return <View style={styles.row}>
+      <TouchableOpacity key={item.bookCount} onPress={() => this._pressRow(item)} underlayColor="transparent" style={styles.rowItem}>
+        <Text>{item.name}</Text>
+        <Text>{item.bookCount}</Text>
+      </TouchableOpacity>
     </View>
-  )
-  // item.section.data
-  _readerList = (item) => {
-    console.log(item)
-    return <TouchableOpacity key={item.bookCount} onPress={() => this._pressRow(item)} underlayColor="transparent">
-    <View style={styles.row}>
-    <Text>{item.name}</Text>
-    <Text>{item.bookCount}</Text>
-    </View>
-    </TouchableOpacity>
   }
   readerHeader = (headerItem) => {
-    return <View style={{height: 25, borderBottomWidth: 1, borderColor: '#d3d3d3', margin: 10, paddingBottom: 5}}>
+    return <View style={styles.sectionHeaderItem}>
     <Text style={styles.sectionHeader}>{headerItem.section.key}</Text>
     </View>
   }
@@ -87,12 +74,14 @@ export default class Stack extends React.Component {
       <Text style={styles.navigatorStyle}> 发现 </Text>
       <View style={{ flex: 1, backgroundColor: '#F7F6F8' }}>
       <SectionList
-      // contentInset={{top:0,left:0,bottom:49,right:0}}
-      renderItem={this.readerItem}
-      renderSectionHeader={this.readerHeader}
-      showsVerticalScrollIndicator={false}
-      sections={sections}
-      keyExtractor={(item) => item.name}
+        // contentInset={{top:0,left:0,bottom:49,right:0}}
+        renderItem={this.readerItem}
+        renderSectionHeader={this.readerHeader}
+        showsVerticalScrollIndicator={false}
+        sections={sections}
+        keyExtractor={(item) => item.name}
+        contentContainerStyle={styles.list}//设置cell的样式
+        pageSize={4}  // 配置pageSize确认网格数量
       />
       </View>
       </View>
@@ -127,12 +116,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   list: {
-    width: '100%',
-    marginBottom: 5,
-    height: 50,
-    backgroundColor: '#d3d3d3',
+    //justifyContent: 'space-around',
     flexDirection: 'row',//设置横向布局
     flexWrap: 'wrap',  //设置换行显示
+    alignItems: 'flex-start',
+    backgroundColor: '#FFFFFF'
   },
   text: {
     width: 100,
@@ -140,6 +128,15 @@ const styles = StyleSheet.create({
     borderWidth:1,
     margin: 5,
     padding:5
+  },
+  sectionHeaderItem: {
+    width:ScreenWidth,
+    height: 25,
+    borderBottomWidth: 1,
+    borderColor: '#d3d3d3',
+    marginTop: 10,
+    marginBottom: 10,
+    paddingBottom: 5
   },
   sectionHeader: {
     marginLeft: 10,
@@ -151,10 +148,17 @@ const styles = StyleSheet.create({
   },
   row: {
     backgroundColor: '#FFFFFF',
-    paddingTop: (ScreenWidth - 1) / 4 /12,
+    // paddingTop: (ScreenWidth - 1) / 4 /12,
     // justifyContent: 'center',
-    width: (ScreenWidth - 1) / 4,
-    height: (ScreenWidth - 1) / 4,
+    width: ScreenWidth / 3,
+    height: ScreenWidth / 6,
     alignItems: 'center',
+  },
+  rowItem: {
+    width: '80%',
+    padding:10,
+    borderRadius:5,
+    alignItems: 'center',
+    borderWidth: 1,
   }
 });
