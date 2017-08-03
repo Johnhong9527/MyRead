@@ -8,4 +8,5 @@ import {
   AppRegistry,
 } from 'react-native';
 import AppMain from './src/App';
+//import AppMain from './src/pages/BookStand';
 AppRegistry.registerComponent('myApp', () => AppMain);
