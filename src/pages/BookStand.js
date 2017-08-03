@@ -5,6 +5,7 @@ import {
   Modal,
   FlatList,
   TouchableHighlight,
+  TouchableNativeFeedback,
   StyleSheet
 } from 'react-native';
 import axios from 'axios'
@@ -25,8 +26,8 @@ export default class BookStand extends React.Component {
       let chapterBody = res.data.chapter.body.replace('↵','\n').split('\n')
       for (let i in chapterBody) {
         chapterBody[i] = {
-            name: '       ' + chapterBody[i],
-            key: i
+          name: '       ' + chapterBody[i],
+          key: i
         }
       }
       this.setState({
@@ -35,19 +36,35 @@ export default class BookStand extends React.Component {
       })
     })
   }
+  test() {
+    alert(123);
+  }
 
   render() {
     console.log(this.state.chapterBody)
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>{this.state.chapterTitle}</Text>
-        <FlatList
-          data={this.state.chapterBody}
-          horizontal={false}
-          numColumns={1}
-          keyExtractor={(item) => item.key}
-          renderItem={({item}) => <Text style={styles.textItem}>{item.name}</Text>}
-        />
+        <TouchableNativeFeedback onPress={this.test}>
+          <View>
+            <Text style={styles.welcome}>{this.state.chapterTitle}</Text>
+
+
+            <FlatList
+              data={this.state.chapterBody}
+              horizontal={false}
+              numColumns={1}
+              keyExtractor={(item) => item.key}
+              renderItem={({item}) =>
+
+                <Text style={styles.textItem}>{item.name}</Text>
+
+
+              }
+            />
+          </View>
+
+        </TouchableNativeFeedback>
+
       </View>
     );
   }
@@ -73,3 +90,4 @@ const styles = StyleSheet.create({
     lineHeight: 30
   }
 });
+
