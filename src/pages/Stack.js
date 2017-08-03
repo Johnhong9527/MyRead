@@ -28,18 +28,7 @@ export default class Stack extends React.Component {
 
   componentDidMount() {
     axios.get('http://api.zhuishushenqi.com/cats/lv2/statistics').then(res => {
-      let statistics = []
-      statistics.push({key: 0, data: res.data.male});
-      statistics.push({key: 1, data: res.data.female});
-      statistics.push({key: 2, data: res.data.picture});
-      statistics.push({key: 3, data: res.data.press});
-      this.setState({
-        statistics: statistics,
-        male: res.data.male,
-        female: res.data.female,
-        picture: res.data.picture,
-        press: res.data.press
-      })
+      this.setState({})
     })
   }
   _renderItem = ({item}) => (
