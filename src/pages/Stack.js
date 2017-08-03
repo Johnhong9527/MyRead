@@ -81,7 +81,7 @@ export default class Stack extends React.Component {
         sections={sections}
         keyExtractor={(item) => item.name}
         contentContainerStyle={styles.list}//设置cell的样式
-        pageSize={4}  // 配置pageSize确认网格数量
+        // pageSize={4}  // 配置pageSize确认网格数量
       />
       </View>
       </View>
